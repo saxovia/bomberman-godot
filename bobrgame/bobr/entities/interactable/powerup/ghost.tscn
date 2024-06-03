@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://q2na02jxd0hy"]
+
+[ext_resource type="Script" path="res://entities/interactable/powerup/ghost.gd" id="1_yahbi"]
+[ext_resource type="Texture2D" uid="uid://blq2uisr7cap2" path="res://assets/objects/ghost.png" id="2_3tm2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5y6v"]
+size = Vector2(92, 92)
+
+[node name="Ghost" type="StaticBody2D"]
+scale = Vector2(0.323, 0.323)
+script = ExtResource("1_yahbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(0.132754, 0.132754)
+texture = ExtResource("2_3tm2u")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_p5y6v")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="EndTimer" type="Timer" parent="."]
+
+[node name="FlickerTimer" type="Timer" parent="."]
+
+[node name="FlickerTimer2" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
+[connection signal="timeout" from="FlickerTimer" to="." method="_on_flicker_time_timeout"]
+[connection signal="timeout" from="FlickerTimer2" to="." method="_on_flicker_timer_2_timeout"]

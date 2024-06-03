@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bmevc5ep5wcdf"]
+
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="1_up4wx"]
+
+[resource]
+font = ExtResource("1_up4wx")
+font_size = 60
+font_color = Color(0.976471, 0.870588, 0.568627, 1)
+outline_size = 50
+outline_color = Color(0.364706, 0.247059, 0.176471, 1)
+shadow_size = 2

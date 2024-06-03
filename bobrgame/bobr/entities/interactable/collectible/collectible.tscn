@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://y08feyd0hd2w"]
+
+[ext_resource type="Script" path="res://entities/interactable/collectible/collectible.gd" id="1_elne4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4la7"]
+radius = 12.0416
+
+[node name="Collectible" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="hitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_elne4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+shape = SubResource("CircleShape2D_b4la7")
+debug_color = Color(0.929412, 0.133333, 0.560784, 0.419608)
+
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]

@@ -1,0 +1,149 @@
+[gd_scene load_steps=7 format=3 uid="uid://lv0kbhwdjlga"]
+
+[ext_resource type="Theme" uid="uid://bi6y5204pt206" path="res://assets/themes/bigButtons.tres" id="1_bdtk5"]
+[ext_resource type="Script" path="res://scenes/menus/singleplayer/load_menu.gd" id="1_m84g0"]
+[ext_resource type="Texture2D" uid="uid://cvrt4hqopfoy1" path="res://assets/UI/ArrowLeft@2x.png" id="1_qayol"]
+[ext_resource type="Shader" path="res://scenes/menus/game/pause_menu.gdshader" id="2_64tpe"]
+[ext_resource type="LabelSettings" uid="uid://bmevc5ep5wcdf" path="res://assets/themes/title.tres" id="4_t484t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ignt"]
+shader = ExtResource("2_64tpe")
+shader_parameter/amount = 3.0
+
+[node name="LoadMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m84g0")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1ignt")
+layout_mode = 0
+offset_top = -5.0
+offset_right = 40.0
+offset_bottom = 35.0
+scale = Vector2(28.8339, 19.6147)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 18.0
+offset_right = 1156.0
+offset_bottom = 670.0
+color = Color(1, 1, 1, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -507.0
+offset_top = -205.0
+offset_right = 503.0
+offset_bottom = 191.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Load1" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "smth
+smth
+smth"
+
+[node name="Load2" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "smth
+smth
+smth"
+
+[node name="Load3" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "smth
+smth
+smth"
+
+[node name="Load4" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "smth
+smth
+smth"
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -507.0
+offset_top = 37.0
+offset_right = 503.0
+offset_bottom = 120.0
+grow_horizontal = 2
+text = "LOAD GAME"
+label_settings = ExtResource("4_t484t")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -107.0
+offset_right = 41.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_bdtk5")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/MarginContainer/BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -10.0
+offset_right = 25.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qayol")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+offset_left = 481.0
+offset_top = 479.0
+offset_right = 685.0
+offset_bottom = 529.0
+
+[node name="LoadGame" type="Button" parent="ColorRect/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("1_bdtk5")
+text = "Load"
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/Load1" to="." method="_on_load_1_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Load2" to="." method="_on_load_2_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Load3" to="." method="_on_load_3_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Load4" to="." method="_on_load_4_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer2/LoadGame" to="." method="_on_load_game_pressed"]

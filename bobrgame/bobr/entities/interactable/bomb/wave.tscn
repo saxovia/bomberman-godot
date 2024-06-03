@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://lhjpal7y45sb"]
+
+[ext_resource type="Script" path="res://entities/interactable/bomb/wave.gd" id="1_ibdt1"]
+[ext_resource type="Texture2D" uid="uid://ugbaowq4eyqe" path="res://assets/objects/wave.png" id="1_pmdd4"]
+
+[sub_resource type="Animation" id="Animation_g2afg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_4xaox"]
+resource_name = "move"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7qu2"]
+_data = {
+"RESET": SubResource("Animation_g2afg"),
+"move": SubResource("Animation_4xaox")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysj00"]
+size = Vector2(32, 34)
+
+[node name="Wave" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_ibdt1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_pmdd4")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p7qu2")
+}
+
+[node name="ExplosionArea" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ysj00")
+debug_color = Color(0.964706, 0, 0.482353, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

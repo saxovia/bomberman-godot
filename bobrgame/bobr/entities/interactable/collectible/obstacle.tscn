@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2dq1fpwo0kdy"]
+
+[ext_resource type="PackedScene" uid="uid://y08feyd0hd2w" path="res://entities/interactable/collectible/collectible.tscn" id="1_k4iak"]
+[ext_resource type="Texture2D" uid="uid://bqjnklokaeecl" path="res://assets/objects/cratepickup.png" id="2_b1a3q"]
+[ext_resource type="Script" path="res://entities/interactable/collectible/obstacle.gd" id="3_6o8wn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi1rj"]
+size = Vector2(24, 24)
+
+[node name="Obstacle" instance=ExtResource("1_k4iak")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-2.5, -3.14198)
+scale = Vector2(0.859375, 0.816937)
+texture = ExtResource("2_b1a3q")
+
+[node name="hitBox" parent="." index="1"]
+script = ExtResource("3_6o8wn")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="hitBox" index="0"]
+shape = SubResource("RectangleShape2D_qi1rj")
+metadata/_edit_lock_ = true

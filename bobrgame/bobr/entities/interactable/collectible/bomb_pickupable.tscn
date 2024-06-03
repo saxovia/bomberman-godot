@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://btf31dp2cba5"]
+
+[ext_resource type="PackedScene" uid="uid://y08feyd0hd2w" path="res://entities/interactable/collectible/collectible.tscn" id="1_2q65m"]
+[ext_resource type="Texture2D" uid="uid://yknockxj3n1t" path="res://assets/objects/bombpickup.png" id="2_j4m8j"]
+
+[node name="BombPickupable" instance=ExtResource("1_2q65m")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_j4m8j")

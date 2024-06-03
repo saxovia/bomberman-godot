@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpyx1ogbkvwl5"]
+
+[ext_resource type="Script" path="res://entities/interactable/bomb/waveCollCheck.gd" id="1_0gt5p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vpp0"]
+size = Vector2(16, 16)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("1_0gt5p")
+
+[node name="AreaCheck" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1vpp0")
+debug_color = Color(0.964706, 0, 0.482353, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

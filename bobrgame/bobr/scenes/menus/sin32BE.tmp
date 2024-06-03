@@ -1,0 +1,127 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl6bppjxplwed"]
+
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="1_peybi"]
+[ext_resource type="Theme" uid="uid://bi6y5204pt206" path="res://assets/themes/bigButtons.tres" id="2_hne2d"]
+[ext_resource type="Texture2D" uid="uid://cvrt4hqopfoy1" path="res://assets/UI/ArrowLeft@2x.png" id="3_prn0g"]
+
+[sub_resource type="GDScript" id="GDScript_kl0ti"]
+script/source = "extends Control
+
+
+func _on_single_load_game_button_pressed():
+	Global.previous_scene = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file(\"res://scenes/menus/load_menu.tscn\")
+	#add_child(load((\"res://scenes/menus/load_menu.tscn\")).instantiate())
+	
+	
+func _on_single_new_game_button_pressed():
+	get_tree().change_scene_to_file(\"res://scenes/game/game.tscn\")
+
+
+func _on_back_pressed():
+	get_tree().change_scene_to_file(\"res://scenes/main/main.tscn\")
+	#queue_free()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_sde3h"]
+font_size = 60
+shadow_size = 2
+
+[node name="SingleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_kl0ti")
+
+[node name="Singleplayer" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -231.5
+offset_top = 75.0
+offset_right = 234.5
+offset_bottom = 171.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_peybi")
+text = "Singleplayer"
+label_settings = SubResource("LabelSettings_sde3h")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="SingleContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = 134.0
+offset_right = 188.0
+offset_bottom = 237.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="SingleNewGameButton" type="Button" parent="SingleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hne2d")
+text = "New Game"
+
+[node name="SingleLoadGameButton" type="Button" parent="SingleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hne2d")
+text = "Load Game"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.89
+anchor_right = 0.078
+anchor_bottom = 0.958
+offset_left = 2.224
+offset_top = 2.27997
+offset_right = -1.856
+offset_bottom = 0.215942
+grow_vertical = 0
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -2
+theme_override_constants/margin_bottom = -2
+
+[node name="Button" type="Button" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_hne2d")
+theme_type_variation = &"small_w_icon"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 7.00006
+offset_right = -13.0
+offset_bottom = -13.9999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_prn0g")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="pressed" from="SingleContainer/SingleNewGameButton" to="." method="_on_single_new_game_button_pressed"]
+[connection signal="pressed" from="SingleContainer/SingleLoadGameButton" to="." method="_on_single_load_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_back_pressed"]

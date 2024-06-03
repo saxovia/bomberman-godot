@@ -1,0 +1,402 @@
+[gd_scene load_steps=11 format=3 uid="uid://4pjw5dvhjmpa"]
+
+[ext_resource type="Script" path="res://scenes/menus/multiplayer/multi_menu.gd" id="1_s8cv7"]
+[ext_resource type="LabelSettings" uid="uid://bmevc5ep5wcdf" path="res://assets/themes/title.tres" id="3_0iawk"]
+[ext_resource type="Theme" uid="uid://bi6y5204pt206" path="res://assets/themes/bigButtons.tres" id="3_dpc4l"]
+[ext_resource type="AudioStream" uid="uid://ckqe6ukwee3st" path="res://assets/audio/sfx/uicancel.mp3" id="4_8h5ju"]
+[ext_resource type="Texture2D" uid="uid://cvrt4hqopfoy1" path="res://assets/UI/ArrowLeft@2x.png" id="4_x4lpw"]
+[ext_resource type="PackedScene" uid="uid://c0er0l7rslp3n" path="res://scenes/menus/multiplayer/lobby.tscn" id="5_ynpdw"]
+[ext_resource type="AudioStream" uid="uid://ruv8drg81mk2" path="res://assets/audio/sfx/uihover.mp3" id="7_2vngh"]
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="8_exqgp"]
+[ext_resource type="AudioStream" uid="uid://bkcptj3o0owvm" path="res://assets/audio/sfx/uiclickon.mp3" id="8_fm1p6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6i4mc"]
+font_size = 23
+
+[node name="MultiMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s8cv7")
+
+[node name="HoverStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_2vngh")
+volume_db = -20.0
+pitch_scale = 1.75
+
+[node name="AcceptStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fm1p6")
+volume_db = -17.0
+
+[node name="BackStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8h5ju")
+volume_db = -22.0
+
+[node name="MultiMain" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Singleplayer" type="Label" parent="MultiMain"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 324.5
+offset_top = 75.0
+offset_right = 790.5
+offset_bottom = 171.0
+grow_horizontal = 2
+text = "Multiplayer"
+label_settings = ExtResource("3_0iawk")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="SingleContainer" type="HBoxContainer" parent="MultiMain"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 369.0
+offset_top = 438.0
+offset_right = 744.0
+offset_bottom = 541.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="HostMenuButton" type="Button" parent="MultiMain/SingleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_dpc4l")
+text = "Host Game"
+
+[node name="ConnectMenuButton" type="Button" parent="MultiMain/SingleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_dpc4l")
+text = "Connect"
+
+[node name="MarginContainer" type="MarginContainer" parent="MultiMain"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.89
+anchor_right = 0.078
+anchor_bottom = 0.958
+offset_left = 43.48
+offset_top = 544.4
+offset_right = 84.88
+offset_bottom = 582.68
+grow_vertical = 0
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -2
+theme_override_constants/margin_bottom = -2
+
+[node name="Button" type="Button" parent="MultiMain/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_dpc4l")
+theme_type_variation = &"small_w_icon"
+
+[node name="TextureRect" type="TextureRect" parent="MultiMain/MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 7.00006
+offset_right = -13.0
+offset_bottom = -13.9999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_x4lpw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Lobby" parent="." instance=ExtResource("5_ynpdw")]
+visible = false
+layout_mode = 1
+
+[node name="ConnectMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ConnectMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ConnectMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ConnectMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Enter IP:"
+horizontal_alignment = 1
+
+[node name="IPAdress" type="LineEdit" parent="ConnectMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "127.0.0.1"
+
+[node name="ConnectGameButton" type="Button" parent="ConnectMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Connect"
+
+[node name="MarginContainer" type="MarginContainer" parent="ConnectMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.89
+anchor_right = 0.078
+anchor_bottom = 0.958
+offset_left = 4.224
+offset_top = -34.72
+offset_right = 19.144
+offset_bottom = -18.784
+grow_vertical = 0
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -2
+theme_override_constants/margin_bottom = -2
+
+[node name="BackButton" type="Button" parent="ConnectMenu/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_dpc4l")
+theme_type_variation = &"small_w_icon"
+
+[node name="TextureRect" type="TextureRect" parent="ConnectMenu/MarginContainer/BackButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 9.0
+offset_right = -11.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_x4lpw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+initial_position = 2
+always_on_top = true
+
+[node name="LevelSelectionMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelSelectionMenu"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 202.0
+offset_right = 130.0
+offset_bottom = 242.0
+scale = Vector2(24.7109, 5.75947)
+color = Color(0, 0, 0, 0.337255)
+
+[node name="LevelSelectionLabel" type="Label" parent="LevelSelectionMenu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = -245.645
+offset_right = 286.0
+offset_bottom = -149.645
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_exqgp")
+text = "Game settings"
+label_settings = ExtResource("3_0iawk")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="SingleContainer" type="HBoxContainer" parent="LevelSelectionMenu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = 134.0
+offset_right = 188.0
+offset_bottom = 237.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelSelectionMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.89
+anchor_right = 0.078
+anchor_bottom = 0.958
+offset_left = 2.224
+offset_top = 2.27997
+offset_right = -1.856
+offset_bottom = 0.215942
+grow_vertical = 0
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -2
+theme_override_constants/margin_bottom = -2
+
+[node name="Button" type="Button" parent="LevelSelectionMenu/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_dpc4l")
+theme_type_variation = &"small_w_icon"
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelectionMenu/MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 7.00006
+offset_right = -13.0
+offset_bottom = -13.9999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_x4lpw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CurrentLevel" type="Label" parent="LevelSelectionMenu"]
+layout_mode = 2
+offset_left = 536.0
+offset_top = 238.0
+offset_right = 707.0
+offset_bottom = 276.0
+text = "PLACEHOLDER"
+label_settings = SubResource("LabelSettings_6i4mc")
+horizontal_alignment = 1
+
+[node name="CurrentRounds" type="Label" parent="LevelSelectionMenu"]
+layout_mode = 2
+offset_left = 536.0
+offset_top = 325.0
+offset_right = 707.0
+offset_bottom = 363.0
+text = "PLACEHOLDER"
+label_settings = SubResource("LabelSettings_6i4mc")
+horizontal_alignment = 1
+
+[node name="LevelSlider" type="HSlider" parent="LevelSelectionMenu"]
+layout_mode = 2
+offset_left = 325.0
+offset_top = 286.0
+offset_right = 930.0
+offset_bottom = 302.0
+max_value = 2.0
+tick_count = 2
+metadata/_edit_lock_ = true
+
+[node name="RoundSlider" type="HSlider" parent="LevelSelectionMenu"]
+layout_mode = 2
+offset_left = 326.0
+offset_top = 370.0
+offset_right = 931.0
+offset_bottom = 386.0
+min_value = 5.0
+max_value = 13.0
+value = 5.0
+tick_count = 8
+
+[node name="LevelLabel" type="Label" parent="LevelSelectionMenu"]
+layout_mode = 2
+offset_left = 162.0
+offset_top = 278.0
+offset_right = 270.0
+offset_bottom = 310.0
+text = "Level:"
+label_settings = SubResource("LabelSettings_6i4mc")
+horizontal_alignment = 2
+
+[node name="RoundsLabel" type="Label" parent="LevelSelectionMenu"]
+layout_mode = 2
+offset_left = 113.0
+offset_top = 357.0
+offset_right = 273.0
+offset_bottom = 389.0
+text = "Rounds:"
+label_settings = SubResource("LabelSettings_6i4mc")
+horizontal_alignment = 2
+
+[node name="HoverStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_2vngh")
+volume_db = -20.0
+pitch_scale = 1.75
+
+[node name="AcceptStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fm1p6")
+volume_db = -17.0
+
+[connection signal="mouse_entered" from="MultiMain/SingleContainer/HostMenuButton" to="." method="_on_host_menu_button_mouse_entered"]
+[connection signal="pressed" from="MultiMain/SingleContainer/HostMenuButton" to="." method="_on_host_game_button_pressed"]
+[connection signal="mouse_entered" from="MultiMain/SingleContainer/ConnectMenuButton" to="." method="_on_connect_menu_button_mouse_entered"]
+[connection signal="pressed" from="MultiMain/SingleContainer/ConnectMenuButton" to="." method="_on_connect_menu_button_pressed"]
+[connection signal="pressed" from="MultiMain/MarginContainer/Button" to="." method="_on_back_pressed"]
+[connection signal="mouse_entered" from="ConnectMenu/PanelContainer/MarginContainer/VBoxContainer/ConnectGameButton" to="." method="_on_connect_game_button_mouse_entered"]
+[connection signal="pressed" from="ConnectMenu/PanelContainer/MarginContainer/VBoxContainer/ConnectGameButton" to="." method="_on_connect_game_button_pressed"]
+[connection signal="pressed" from="ConnectMenu/MarginContainer/BackButton" to="." method="_on_connect_back_button_pressed"]
+[connection signal="canceled" from="ErrorDialog" to="." method="_leave_lobby"]
+[connection signal="confirmed" from="ErrorDialog" to="." method="_leave_lobby"]
+[connection signal="mouse_entered" from="LevelSelectionMenu/MarginContainer/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="LevelSelectionMenu/MarginContainer/Button" to="LevelSelectionMenu" method="_on_back_pressed"]
+[connection signal="value_changed" from="LevelSelectionMenu/LevelSlider" to="." method="_on_level_slider_value_changed"]
+[connection signal="value_changed" from="LevelSelectionMenu/RoundSlider" to="." method="_on_round_slider_value_changed"]

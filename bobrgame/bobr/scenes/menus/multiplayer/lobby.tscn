@@ -1,0 +1,177 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0er0l7rslp3n"]
+
+[ext_resource type="LabelSettings" uid="uid://bmevc5ep5wcdf" path="res://assets/themes/title.tres" id="2_kvorq"]
+[ext_resource type="Texture2D" uid="uid://css6d8o3grm73" path="res://assets/UI/player1.png" id="2_ptr8p"]
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="2_rhgof"]
+[ext_resource type="Texture2D" uid="uid://cbx0yrw54ml73" path="res://assets/UI/player2.png" id="3_a4jia"]
+[ext_resource type="Theme" uid="uid://bi6y5204pt206" path="res://assets/themes/bigButtons.tres" id="5_8iskm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wvg4g"]
+font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_1l1jo"]
+font = ExtResource("2_rhgof")
+font_size = 30
+font_color = Color(0.976471, 0.870588, 0.568627, 1)
+outline_size = 25
+outline_color = Color(0.364706, 0.247059, 0.176471, 1)
+shadow_size = 2
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Waiting" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Singleplayer" type="Label" parent="Waiting"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 324.5
+offset_top = 75.0
+offset_right = 790.5
+offset_bottom = 171.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_rhgof")
+text = "Lobby"
+label_settings = ExtResource("2_kvorq")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Waiting"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = 256.0
+offset_right = 940.0
+offset_bottom = 434.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Waiting/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Player1Container" type="HBoxContainer" parent="Waiting/VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 19
+
+[node name="TextureRect" type="TextureRect" parent="Waiting/VBoxContainer/PanelContainer/Player1Container"]
+layout_mode = 2
+texture = ExtResource("2_ptr8p")
+expand_mode = 2
+
+[node name="Player1Label" type="Label" parent="Waiting/VBoxContainer/PanelContainer/Player1Container"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Waiting/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Player2Container" type="HBoxContainer" parent="Waiting/VBoxContainer/PanelContainer2"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 19
+
+[node name="TextureRect" type="TextureRect" parent="Waiting/VBoxContainer/PanelContainer2/Player2Container"]
+layout_mode = 2
+texture = ExtResource("3_a4jia")
+expand_mode = 2
+
+[node name="Player2Label" type="Label" parent="Waiting/VBoxContainer/PanelContainer2/Player2Container"]
+layout_mode = 2
+text = "Player 2"
+
+[node name="LeaveLobby" type="Button" parent="Waiting"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 35.0
+offset_top = 582.0
+offset_right = 172.0
+offset_bottom = 627.0
+theme = ExtResource("5_8iskm")
+theme_type_variation = &"small_w_icon"
+theme_override_font_sizes/font_size = 15
+text = "Leave Lobby"
+
+[node name="StartGameButton" type="Button" parent="Waiting"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 470.0
+offset_top = 460.0
+offset_right = 642.0
+offset_bottom = 542.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme = ExtResource("5_8iskm")
+disabled = true
+text = "Start game"
+
+[node name="GameStateLabel" type="Label" parent="Waiting"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 487.5
+offset_top = 510.0
+offset_right = 624.5
+offset_bottom = 533.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Waiting for host..."
+label_settings = SubResource("LabelSettings_wvg4g")
+horizontal_alignment = 1
+
+[node name="IPAdress" type="Label" parent="Waiting"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 135.0
+offset_right = 1132.0
+offset_bottom = 231.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_rhgof")
+text = "IPLabel"
+label_settings = SubResource("LabelSettings_1l1jo")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="GameSettings" type="Button" parent="Waiting"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 520.0
+offset_right = 477.0
+offset_bottom = 571.0
+text = "GAME SETTINGS"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

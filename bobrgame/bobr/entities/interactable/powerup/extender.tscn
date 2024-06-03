@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3grs7nm5ll0i"]
+
+[ext_resource type="Script" path="res://entities/interactable/powerup/extender.gd" id="1_wb242"]
+[ext_resource type="AudioStream" uid="uid://r5vbugg7xhw7" path="res://assets/audio/sfx/getpowerup.mp3" id="2_jfami"]
+[ext_resource type="Texture2D" uid="uid://b4st3ct27vppr" path="res://assets/objects/extender.png" id="2_s41at"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5y6v"]
+size = Vector2(23.8462, 23.0769)
+
+[node name="Extender" type="StaticBody2D"]
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_wb242")
+
+[node name="GetPowerUpStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jfami")
+volume_db = -25.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.384615, -0.00767767)
+scale = Vector2(0.745192, 0.730288)
+texture = ExtResource("2_s41at")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.384615, 4.12648e-07)
+shape = SubResource("RectangleShape2D_p5y6v")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="EndTimer" type="Timer" parent="."]
+
+[node name="FlickerTimer" type="Timer" parent="."]
+
+[node name="FlickerTimer2" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
+[connection signal="timeout" from="FlickerTimer" to="." method="_on_flicker_time_timeout"]
+[connection signal="timeout" from="FlickerTimer2" to="." method="_on_flicker_timer_2_timeout"]

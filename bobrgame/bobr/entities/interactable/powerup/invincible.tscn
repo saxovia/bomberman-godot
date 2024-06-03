@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4k48ivllrubd"]
+
+[ext_resource type="Script" path="res://entities/interactable/powerup/invincible.gd" id="1_w2p6k"]
+[ext_resource type="Texture2D" uid="uid://d28sluwn41c5w" path="res://assets/objects/star.png" id="2_x8m2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucqph"]
+size = Vector2(1330, 1335)
+
+[node name="Invincible" type="StaticBody2D"]
+scale = Vector2(0.021, 0.021)
+script = ExtResource("1_w2p6k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.76134, 3.76134)
+texture = ExtResource("2_x8m2o")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1.19209e-07)
+shape = SubResource("RectangleShape2D_ucqph")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="EndTimer" type="Timer" parent="."]
+
+[node name="FlickerTimer" type="Timer" parent="."]
+
+[node name="FlickerTimer2" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
+[connection signal="timeout" from="FlickerTimer" to="." method="_on_flicker_timer_timeout"]
+[connection signal="timeout" from="FlickerTimer2" to="." method="_on_flicker_timer_2_timeout"]

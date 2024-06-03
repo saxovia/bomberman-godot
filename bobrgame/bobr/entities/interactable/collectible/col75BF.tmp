@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh68upgtamet1"]
+
+[ext_resource type="Script" path="res://entities/interactable/collectible/collectible.gd" id="1_kp4mi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7ow8"]
+resource_local_to_scene = true
+
+[node name="Collectible" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_kp4mi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j7ow8")
+debug_color = Color(0.87451, 0.313726, 0.396078, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

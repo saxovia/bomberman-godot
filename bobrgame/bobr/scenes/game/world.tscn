@@ -1,0 +1,228 @@
+[gd_scene load_steps=15 format=3 uid="uid://bgb4iqtm33ju7"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_q2uq5"]
+[ext_resource type="AudioStream" uid="uid://bs1fxhvunjy73" path="res://assets/audio/music/levelmusic.mp3" id="2_23jem"]
+[ext_resource type="AudioStream" uid="uid://878paivy5qvc" path="res://assets/audio/music/levelmusicend.mp3" id="3_u13gi"]
+[ext_resource type="PackedScene" uid="uid://cd58qeukktc1j" path="res://entities/enemy/enemy.tscn" id="6_c2mno"]
+[ext_resource type="PackedScene" uid="uid://d25cukxkjk2pm" path="res://entities/interactable/destructible/crate.tscn" id="7_8oohd"]
+[ext_resource type="PackedScene" uid="uid://b0sqtfjlhilsc" path="res://scenes/menus/game/pause_menu.tscn" id="8_7qv8d"]
+[ext_resource type="Script" path="res://scenes/game/bomb_spawner.gd" id="9_mv4bp"]
+[ext_resource type="PackedScene" uid="uid://dwld0mwnyy6iu" path="res://scenes/menus/game/gameOver_menu.tscn" id="9_rf0h3"]
+[ext_resource type="PackedScene" uid="uid://lv0kbhwdjlga" path="res://scenes/menus/singleplayer/load_menu.tscn" id="10_18ohs"]
+[ext_resource type="Script" path="res://scenes/game/wave_spawner.gd" id="10_630s7"]
+[ext_resource type="PackedScene" uid="uid://caho2h7vqk5jp" path="res://scenes/menus/singleplayer/save_menu.tscn" id="11_anv5n"]
+[ext_resource type="Script" path="res://scenes/game/obstacle_spawner.gd" id="11_y5wd2"]
+[ext_resource type="PackedScene" uid="uid://bg17n0mlmfwd4" path="res://scenes/game/score_ui.tscn" id="16_7obgv"]
+[ext_resource type="Script" path="res://scenes/game/camera.gd" id="16_n6dh4"]
+
+[node name="World" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_q2uq5")
+
+[node name="StandardMusicLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_23jem")
+volume_db = -25.0
+
+[node name="EndMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u13gi")
+volume_db = -20.0
+
+[node name="Crates" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Crate" parent="Crates" instance=ExtResource("7_8oohd")]
+position = Vector2(506.154, 213.077)
+
+[node name="Crate2" parent="Crates" instance=ExtResource("7_8oohd")]
+position = Vector2(528.462, 220.769)
+
+[node name="Crate3" parent="Crates" instance=ExtResource("7_8oohd")]
+position = Vector2(507.692, 233.077)
+
+[node name="Barrels" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Bombs" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Enemy" parent="Enemies" groups=["enemies"] instance=ExtResource("6_c2mno")]
+position = Vector2(304, 96)
+collision_layer = 161
+collision_mask = 161
+
+[node name="Enemy2" parent="Enemies" groups=["enemies"] instance=ExtResource("6_c2mno")]
+position = Vector2(618, 331)
+collision_layer = 161
+collision_mask = 161
+
+[node name="Players" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Menus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreUi" parent="Menus" instance=ExtResource("16_7obgv")]
+top_level = true
+layout_mode = 1
+offset_left = 33.0
+offset_top = 44.0
+offset_right = 33.0
+offset_bottom = 44.0
+scale = Vector2(0.725673, 0.723092)
+
+[node name="GameOverMenu" parent="Menus" instance=ExtResource("9_rf0h3")]
+visible = false
+top_level = true
+layout_mode = 1
+offset_left = -1.0
+offset_right = -256.0
+offset_bottom = -119.0
+
+[node name="PauseMenu" parent="Menus" instance=ExtResource("8_7qv8d")]
+visible = false
+top_level = true
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.775174
+anchor_bottom = 0.830247
+offset_right = 4.0
+
+[node name="LoadMenu" parent="Menus" instance=ExtResource("10_18ohs")]
+visible = false
+top_level = true
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -24.0
+offset_top = -4.0
+offset_right = -24.0
+offset_bottom = -4.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.827457, 0.827457)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SaveMenu" parent="Menus" instance=ExtResource("11_anv5n")]
+visible = false
+top_level = true
+layout_mode = 2
+anchors_preset = 0
+offset_left = -20.0
+offset_right = -20.0
+scale = Vector2(0.817552, 0.817552)
+
+[node name="Control" type="Control" parent="Menus"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 44.6154
+offset_top = 169.231
+offset_right = 84.6154
+offset_bottom = 209.231
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Save" type="Button" parent="Menus/Control/VBoxContainer"]
+layout_mode = 2
+text = "Save
+"
+
+[node name="Load" type="Button" parent="Menus/Control/VBoxContainer"]
+layout_mode = 2
+text = "Load
+"
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="BombSpawner" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://entities/player/player.tscn")
+spawn_path = NodePath("../../Bombs")
+script = ExtResource("9_mv4bp")
+
+[node name="BarrelSpawner" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://entities/interactable/destructible/barrel.tscn")
+spawn_path = NodePath("../../Barrels")
+
+[node name="CrateSpawner" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://entities/interactable/destructible/crate.tscn")
+spawn_path = NodePath("../../Crates")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://entities/player/player.tscn")
+spawn_path = NodePath("../../Players")
+
+[node name="WaveSpawner" type="MultiplayerSpawner" parent="Spawners"]
+spawn_path = NodePath("../../Bombs")
+script = ExtResource("10_630s7")
+
+[node name="ObstacleSpawner" type="MultiplayerSpawner" parent="Spawners"]
+script = ExtResource("11_y5wd2")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+scale = Vector2(0.7, 0.7)
+
+[node name="0" type="Marker2D" parent="SpawnPoints" groups=["PlayerSpawnLocation"]]
+position = Vector2(206.154, 160)
+
+[node name="1" type="Marker2D" parent="SpawnPoints" groups=["PlayerSpawnLocation"]]
+position = Vector2(373.626, 101.099)
+
+[node name="2" type="Marker2D" parent="SpawnPoints" groups=["PlayerSpawnLocation"]]
+position = Vector2(323.077, 261.538)
+
+[node name="3" type="Marker2D" parent="SpawnPoints" groups=["PlayerSpawnLocation"]]
+position = Vector2(624.615, 160)
+
+[node name="ConnectionLost" type="AcceptDialog" parent="."]
+initial_position = 1
+size = Vector2i(399, 100)
+ok_button_text = "Return to main Menu"
+dialog_text = "The game ended because someone disconnected."
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+position = Vector2(446, 263)
+zoom = Vector2(1.3, 1.3)
+script = ExtResource("16_n6dh4")
+
+[node name="CrateSpawnTimer" type="Timer" parent="."]
+wait_time = 60.0
+
+[connection signal="finished" from="StandardMusicLoop" to="." method="_on_standard_music_loop_finished"]
+[connection signal="finished" from="EndMusic" to="." method="_on_standard_music_loop_finished"]
+[connection signal="endGame" from="Enemies/Enemy" to="." method="_on_enemy_end_game"]
+[connection signal="endGame" from="Enemies/Enemy2" to="." method="_on_enemy_end_game"]
+[connection signal="hideScreen" from="Menus/LoadMenu" to="." method="_on_load_menu_hide_screen"]
+[connection signal="loadprocess" from="Menus/LoadMenu" to="." method="_on_load_menu_loadprocess"]
+[connection signal="hideScreen" from="Menus/SaveMenu" to="." method="_on_save_menu_hide_screen"]
+[connection signal="saveprocess" from="Menus/SaveMenu" to="." method="_on_save_menu_saveprocess"]
+[connection signal="pressed" from="Menus/Control/VBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Menus/Control/VBoxContainer/Save" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menus/Control/VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="canceled" from="ConnectionLost" to="." method="_on_connection_lost"]
+[connection signal="confirmed" from="ConnectionLost" to="." method="_on_connection_lost"]
+[connection signal="visibility_changed" from="ConnectionLost" to="." method="_on_connection_lost_visibility_changed"]
+[connection signal="timeout" from="CrateSpawnTimer" to="." method="_on_crate_spawn_timer_timeout"]

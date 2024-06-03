@@ -1,0 +1,143 @@
+[gd_scene load_steps=11 format=3 uid="uid://cl6bppjxplwed"]
+
+[ext_resource type="Script" path="res://scenes/menus/singleplayer/single_menu.gd" id="1_3k0t3"]
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="1_peybi"]
+[ext_resource type="AudioStream" uid="uid://ckqe6ukwee3st" path="res://assets/audio/sfx/uicancel.mp3" id="2_088xl"]
+[ext_resource type="Theme" uid="uid://bi6y5204pt206" path="res://assets/themes/bigButtons.tres" id="2_hne2d"]
+[ext_resource type="AudioStream" uid="uid://bkcptj3o0owvm" path="res://assets/audio/sfx/uiclickon.mp3" id="2_xobr2"]
+[ext_resource type="Texture2D" uid="uid://cvrt4hqopfoy1" path="res://assets/UI/ArrowLeft@2x.png" id="3_prn0g"]
+[ext_resource type="AudioStream" uid="uid://ruv8drg81mk2" path="res://assets/audio/sfx/uihover.mp3" id="3_rhsr4"]
+[ext_resource type="LabelSettings" uid="uid://bmevc5ep5wcdf" path="res://assets/themes/title.tres" id="4_athsr"]
+[ext_resource type="PackedScene" uid="uid://cklnjgls5m5sv" path="res://scenes/menus/level_selection_menu.tscn" id="7_rw6h5"]
+[ext_resource type="PackedScene" uid="uid://lv0kbhwdjlga" path="res://scenes/menus/singleplayer/load_menu.tscn" id="7_x2d8h"]
+
+[node name="SinglePlayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3k0t3")
+
+[node name="BackStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_088xl")
+volume_db = -22.0
+
+[node name="HoverStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rhsr4")
+volume_db = -20.0
+pitch_scale = 1.75
+
+[node name="AcceptStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xobr2")
+volume_db = -17.0
+
+[node name="SingleMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Singleplayer" type="Label" parent="SingleMenu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -232.5
+offset_top = 75.0
+offset_right = 233.5
+offset_bottom = 171.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_peybi")
+text = "Singleplayer"
+label_settings = ExtResource("4_athsr")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="SingleContainer" type="HBoxContainer" parent="SingleMenu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = 134.0
+offset_right = 187.0
+offset_bottom = 237.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="SingleNewGameButton" type="Button" parent="SingleMenu/SingleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hne2d")
+text = "New Game"
+
+[node name="SingleLoadGameButton" type="Button" parent="SingleMenu/SingleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hne2d")
+text = "Load Game"
+
+[node name="MarginContainer" type="MarginContainer" parent="SingleMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.89
+anchor_right = 0.078
+anchor_bottom = 0.958
+offset_left = 2.148
+offset_top = 2.27997
+offset_right = 0.547997
+offset_bottom = 0.215942
+grow_vertical = 0
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -2
+theme_override_constants/margin_bottom = -2
+
+[node name="Button" type="Button" parent="SingleMenu/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_hne2d")
+theme_type_variation = &"small_w_icon"
+
+[node name="TextureRect" type="TextureRect" parent="SingleMenu/MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 7.00006
+offset_right = -13.0
+offset_bottom = -13.9999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_prn0g")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LoadMenu" parent="." instance=ExtResource("7_x2d8h")]
+visible = false
+layout_mode = 1
+
+[node name="LevelSelectionMenu" parent="." instance=ExtResource("7_rw6h5")]
+visible = false
+layout_mode = 1
+
+[connection signal="mouse_entered" from="SingleMenu/SingleContainer/SingleNewGameButton" to="." method="_on_single_new_game_button_mouse_entered"]
+[connection signal="pressed" from="SingleMenu/SingleContainer/SingleNewGameButton" to="." method="_on_single_new_game_button_pressed"]
+[connection signal="mouse_entered" from="SingleMenu/SingleContainer/SingleLoadGameButton" to="." method="_on_single_load_game_button_mouse_entered"]
+[connection signal="pressed" from="SingleMenu/SingleContainer/SingleLoadGameButton" to="." method="_on_single_load_game_button_pressed"]
+[connection signal="pressed" from="SingleMenu/MarginContainer/Button" to="." method="_on_back_pressed"]

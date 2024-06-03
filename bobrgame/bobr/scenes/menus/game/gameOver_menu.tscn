@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwld0mwnyy6iu"]
+
+[ext_resource type="Script" path="res://scenes/menus/game/gameOver_menu.gd" id="1_jq37o"]
+[ext_resource type="Shader" path="res://scenes/menus/game/pause_menu.gdshader" id="2_rph3w"]
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="3_dc6dd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oalew"]
+shader = ExtResource("2_rph3w")
+shader_parameter/amount = 3.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pl7v6"]
+font_size = 60
+shadow_size = 2
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jq37o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_oalew")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.8339, 19.6147)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.0
+offset_top = -65.0
+offset_right = 189.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dc6dd")
+text = "Game Over"
+label_settings = SubResource("LabelSettings_pl7v6")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play again"
+
+[node name="BackToMain" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back to main menu
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackToMain" to="." method="_on_back_to_menu_button_pressed"]

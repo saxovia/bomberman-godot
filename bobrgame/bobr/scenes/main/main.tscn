@@ -1,0 +1,196 @@
+[gd_scene load_steps=16 format=3 uid="uid://cu1sxya3llym"]
+
+[ext_resource type="Texture2D" uid="uid://b1o7xv1jkcpmt" path="res://assets/UI/mainbg.png" id="1_sjr6l"]
+[ext_resource type="Script" path="res://scenes/main/music.gd" id="1_xthm8"]
+[ext_resource type="Texture2D" uid="uid://ckvdrkyh3a40s" path="res://assets/UI/bobrtitle.png" id="2_66jql"]
+[ext_resource type="AudioStream" uid="uid://s50qc4nfcsll" path="res://assets/audio/music/bobr_music.mp3" id="2_b87a0"]
+[ext_resource type="PackedScene" uid="uid://uly0m0bud4t3" path="res://scenes/main/mainuibg.tscn" id="2_mn7pr"]
+[ext_resource type="AudioStream" uid="uid://ruv8drg81mk2" path="res://assets/audio/sfx/uihover.mp3" id="3_4qa5u"]
+[ext_resource type="AudioStream" uid="uid://ckqe6ukwee3st" path="res://assets/audio/sfx/uicancel.mp3" id="3_14tws"]
+[ext_resource type="AudioStream" uid="uid://bkcptj3o0owvm" path="res://assets/audio/sfx/uiclickon.mp3" id="3_ipg2t"]
+[ext_resource type="FontFile" uid="uid://crbl5gri0ttq8" path="res://assets/fonts/JosefinSans-Bold.ttf" id="3_rtgxe"]
+[ext_resource type="Theme" uid="uid://bi6y5204pt206" path="res://assets/themes/bigButtons.tres" id="4_wek3t"]
+[ext_resource type="PackedScene" uid="uid://bv2yeuvmp0v2" path="res://scenes/menus/settings_menu.tscn" id="6_u62iy"]
+[ext_resource type="PackedScene" uid="uid://4pjw5dvhjmpa" path="res://scenes/menus/multiplayer/multi_menu.tscn" id="7_mph6q"]
+[ext_resource type="PackedScene" uid="uid://cl6bppjxplwed" path="res://scenes/menus/singleplayer/single_menu.tscn" id="8_4ly5t"]
+
+[sub_resource type="GDScript" id="GDScript_bk0f0"]
+script/source = "extends Control
+
+
+func _on_single_pressed():
+	playacceptsound()
+	#get_tree().change_scene_to_file(\"res://scenes/menus/singleplayer/single_menu.tscn\")
+	hide()
+	get_parent().get_node(\"SingleMenu\").show()
+	
+func _on_multi_pressed():
+	playacceptsound()
+	#get_tree().change_scene_to_file(\"res://scenes/menus/multiplayer/multi_menu.tscn\")
+	hide()
+	get_parent().get_node(\"MultiMenu\").show()
+	get_parent().get_node(\"MultiMenu\").reset()
+
+func _on_options_pressed():
+	playacceptsound()
+	SaveManager.load_settings_data()
+	hide()
+	get_parent().get_node(\"SettingsMenu\").show()
+	#get_tree().change_scene_to_file(\"res://scenes/menus/settings_menu.tscn\")
+	
+func _on_quit_pressed():
+	playacceptsound()
+	get_tree().quit()
+
+func playacceptsound():
+	$\"../AcceptStreamPlayer\".play()
+
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_sde3h"]
+font_size = 90
+shadow_size = 2
+
+[node name="Main" type="Node"]
+script = ExtResource("1_xthm8")
+
+[node name="Mainuibg" parent="." instance=ExtResource("2_mn7pr")]
+
+[node name="BackStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_14tws")
+volume_db = -22.0
+
+[node name="HoverStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4qa5u")
+volume_db = -20.0
+pitch_scale = 1.75
+
+[node name="AcceptStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ipg2t")
+volume_db = -17.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_b87a0")
+volume_db = -20.0
+
+[node name="SettingsMenu" parent="." instance=ExtResource("6_u62iy")]
+visible = false
+
+[node name="MultiMenu" parent="." instance=ExtResource("7_mph6q")]
+visible = false
+
+[node name="SingleMenu" parent="." instance=ExtResource("8_4ly5t")]
+visible = false
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_bk0f0")
+
+[node name="AlternativeBackground" type="TextureRect" parent="MainMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sjr6l")
+stretch_mode = 6
+
+[node name="ColorRect2" type="ColorRect" parent="MainMenu"]
+visible = false
+layout_mode = 2
+offset_left = 408.0
+offset_top = 335.0
+offset_right = 708.0
+offset_bottom = 835.0
+scale = Vector2(1.12325, 0.546851)
+color = Color(0, 0, 0, 0.478431)
+
+[node name="BOBRMAN" type="Label" parent="MainMenu"]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -238.5
+offset_top = 75.0
+offset_right = 241.5
+offset_bottom = 171.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_rtgxe")
+text = "BOBRMAN
+"
+label_settings = SubResource("LabelSettings_sde3h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainIcon" type="TextureRect" parent="MainMenu"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 31.0
+offset_right = 938.0
+offset_bottom = 561.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_66jql")
+
+[node name="MainContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 65.0
+offset_right = 150.0
+offset_bottom = 295.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="SingleButton" type="Button" parent="MainMenu/MainContainer"]
+custom_minimum_size = Vector2(260, 40)
+layout_mode = 2
+theme = ExtResource("4_wek3t")
+theme_override_font_sizes/font_size = 22
+text = "Singleplayer
+"
+
+[node name="MultiButton" type="Button" parent="MainMenu/MainContainer"]
+custom_minimum_size = Vector2(260, 40)
+layout_mode = 2
+theme = ExtResource("4_wek3t")
+theme_override_font_sizes/font_size = 22
+text = "Multiplayer"
+
+[node name="SettingsButton" type="Button" parent="MainMenu/MainContainer"]
+custom_minimum_size = Vector2(260, 40)
+layout_mode = 2
+theme = ExtResource("4_wek3t")
+theme_override_font_sizes/font_size = 22
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="MainMenu/MainContainer"]
+custom_minimum_size = Vector2(260, 40)
+layout_mode = 2
+theme = ExtResource("4_wek3t")
+theme_override_font_sizes/font_size = 22
+text = "Quit Game"
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
+[connection signal="mouse_entered" from="MainMenu/MainContainer/SingleButton" to="." method="_on_single_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/MainContainer/SingleButton" to="MainMenu" method="_on_single_pressed"]
+[connection signal="mouse_entered" from="MainMenu/MainContainer/MultiButton" to="." method="_on_multi_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/MainContainer/MultiButton" to="MainMenu" method="_on_multi_pressed"]
+[connection signal="mouse_entered" from="MainMenu/MainContainer/SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/MainContainer/SettingsButton" to="MainMenu" method="_on_options_pressed"]
+[connection signal="mouse_entered" from="MainMenu/MainContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/MainContainer/QuitButton" to="MainMenu" method="_on_quit_pressed"]
