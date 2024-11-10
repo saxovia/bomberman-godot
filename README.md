@@ -1,5 +1,5 @@
 # bomberman-godot
-Multi-single player game named BobrMan, made in Godot, based on Bomberman. Features: Extended powerups, multiplayer-networking, keybind customization, save-file system (persistance)
+'BobrMan,' a Bomberman-inspired multi-single player game in Godot, with unit tests, CI/CD integration, and adherence to software engineering principles. Key features: expanded power-ups, multiplayer networking, customizable keybinds, and a persistent save-file system.
 # InGame Screenshots
 
 ![Picture of Main menu](https://github.com/saxovia/bomberman-godot/blob/main/previewimages/mainmenu.png)
